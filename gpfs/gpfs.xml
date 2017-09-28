@@ -1,0 +1,217 @@
+<metricdefinitions version="1">
+
+    <metric id="gpfs_io_cycles">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsIOCycles" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of cycles spent in the GPFS kernel module per second</description>
+                    <displayName>GPFS IO cycles</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_io_cycles_total"/>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_io_cycles_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsIOCyclesTotal" />
+            <display>
+                    <description>The total number of cycles spent in the GPFS kernel module</description>
+                    <displayName>GPFS IO cycles</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_inode_lookups">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsINodeLookups" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of GPFS ionode lookups per second</description>
+                    <displayName>GPFS inode lookups</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_inode_lookups_total"/>
+            </display>
+    </metric>
+
+    <metric id="gpfs_inode_lookups_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsINodeLookups" />
+            <display>
+                    <description>The total number of GPFS ionode lookups</description>
+                    <displayName>GPFS inode lookups</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+            </display>
+    </metric>
+
+    <metric id="gpfs_opens">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsOpens" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of GPFS file open operations per second</description>
+                    <displayName>GPFS file opens</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_opens_total"/>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_opens_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsOpensTotal"/>
+            <display>
+                    <description>The total number of GPFS file open operations</description>
+                    <displayName>GPFS file opens</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <accumulate>true</accumulate>
+            </display>
+    </metric>
+
+    <metric id="gpfs_reads">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsReads" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of GPFS file read operations per second</description>
+                    <displayName>GPFS file reads</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_opens_total"/>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_reads_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsReadsTotal"/>
+            <display>
+                    <description>The total number of GPFS file read operations</description>
+                    <displayName>GPFS file reads</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <accumulate>true</accumulate>
+            </display>
+    </metric>
+
+    <metric id="gpfs_writes">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsWrites" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of GPFS file write operations per second</description>
+                    <displayName>GPFS file writes</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_writes_total"/>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_writes_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsWritesTotal"/>
+            <display>
+                    <description>The total number of GPFS file writes operations</description>
+                    <displayName>GPFS file writes</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <accumulate>true</accumulate>
+            </display>
+    </metric>
+
+    <metric id="gpfs_iops">
+            <units>/s</units>
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsIOPs" divideBySampleTime="true"/>
+            <display>
+                    <description>The number of GPFS IO operations per second</description>
+                    <displayName>GPFS IO operations</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <rel type="integral" name="gpfs_iops_total"/>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_iops_total">
+            <dataType>uint64_t</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsIOPsTotal"/>
+            <display>
+                    <description>The total number of GPFS IO operations</description>
+                    <displayName>GPFS IO operations</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+                    <accumulate>true</accumulate>
+            </display>
+    </metric>
+    
+    <metric id="gpfs_cycles_per_iop"> 
+            <dataType>double</dataType>
+            <domain>time</domain>
+            <onePerNode>true</onePerNode>
+            <source ref="gpfs_src" functionName="allinea_gpfsCyclesPerIOP" />
+            <display>
+                    <description>The average number of cycles spent in the GPFS kernel module per IOP</description>
+                    <displayName>GPFS cycles per IO  operation</displayName>
+                    <type>io</type>
+                    <colour>SpecialLine8</colour>
+                    <autoDisplayFactor>true</autoDisplayFactor>
+            </display>
+    </metric>
+
+    <metricGroup id="gpfs">
+        <displayName>GPFS</displayName>
+        <description>GPFS I/O metrics</description>
+        <metric ref="gpfs_cycles_per_iop"/>
+        <metric ref="gpfs_iops"/>
+        <metric ref="gpfs_opens"/>
+        <metric ref="gpfs_reads"/>
+        <metric ref="gpfs_writes"/>
+        <metric ref="gpfs_inode_lookups"/>
+        <metric ref="gpfs_io_cycles"/>
+    </metricGroup>
+
+    <source id="gpfs_src">
+        <sharedLibrary>lib-gpfs.so</sharedLibrary>
+    </source>
+	
+</metricdefinitions>
