@@ -1,22 +1,23 @@
 LICENSE
 =======
 
-The code is licensed under the Apache License Version 2.0 -- see LICENSE.txt for the full text.
+The code is licensed under the Apache License Version 2.0 -- see LICENSE.txt
+for the full text.
 
 PREREQUISITES
 =======
-This custom metric is designed specifically for an Intel Haswell (Xeon v3) CPU.
-PAPI must also be available on the system on which the metric is installed and
-run.
+This custom metric is designed specifically for an Intel® Xeon® E5 v3 family
+processor.  PAPI must also be available on the system on which the metric is
+installed and run.
 
 A C++11 compiler is required to compile the metric. Unless specified, the
 default value of variable CXX is used for the C++ compiler.
 
-The environment variable ARM_FORGE_CONFIG_DIR must be set to point to the
-location of the Arm Forge Metrics SDK, which is typically in the map/metrics
-sub-folder of the Arm Forge installation directory. For example, if Arm Forge
-is installed in ${ARM_FORGE_INSTALL_DIR} then the Arm Forge Metrics SDK is in
-folder ${ARM_FORGE_INSTALL_DIR}/map/metrics
+The environment variable ARM_FORGE_METRIC_PLUGIN_DIR must be set to point to
+the location of the Arm Forge Metrics SDK, which is typically in the
+map/metrics sub-folder of the Arm Forge installation directory. For example, if
+Arm Forge is installed in ${ARM_FORGE_INSTALL_DIR} then the Arm Forge Metrics
+SDK is in folder ${ARM_FORGE_INSTALL_DIR}/map/metrics
 
 INSTALLATION
 =======
@@ -27,3 +28,8 @@ make
 make install
 
 This will install the custom metric in the ${HOME}/.allinea/map/metrics folder.
+
+FOOTNOTES
+=======
+Intel and Xeon are trademarks of Intel Corporation or its subsidiaries in the
+U.S. and/or other countries.

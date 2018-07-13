@@ -1,12 +1,16 @@
 <metricdefinitions version="1">
     <metric id="haswell.papi.active_cycles">
         <enabled>default_yes</enabled>
-        <units>Cycles</units>
+        <units>Cycles/s</units>
         <dataType>uint64_t</dataType>
         <domain>time</domain>
         <source ref="haswell.papi.membound.src"
             functionName="haswell_membound_active_cycles"
-            divideBySampleTime="false" />
+            divideBySampleTime="true" />
+            <!-- The 'divideBySampleTime' is set to true to give a rate of
+                 operations. The count of the operations will change depending
+                 on the length of the sample interval, which changes at run
+                 time with the statistical sampling approach taken by MAP -->
         <display>
             <displayName>Active cycles</displayName>
             <description>Number of active cycles over a sample period</description>

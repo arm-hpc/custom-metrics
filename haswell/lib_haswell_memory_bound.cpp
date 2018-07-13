@@ -28,7 +28,7 @@
 
 #define ONE_SECOND_NS      1000000000   // The number of nanoseconds in one second
 
-static const int ERRNO = -1; // Returned by a function when there is an error
+static const int ERROR = -1; // Returned by a function when there is an error
 
 ///////////////////////////////////////////////////////////////////////////////
 // The next definitions are user defined. We know the names of the counters
@@ -70,11 +70,11 @@ static std::array<long long, EventInds::NUM_INDS> gEventValues;
 // A global PAPI event set is stored to collect the counter values
 static int gEventSet= PAPI_NULL;
 
-extern "C"{
 // Forward declaration. Used so that in this section we can have all of the
 // functions that are required to report the data for MAP
 static int update_values(metric_id_t metric_id, const struct timespec* current_sample_time);
 
+extern "C"{
 /**
  * Sets the number of active cycles that have been recorded since the last
  * sample
@@ -217,43 +217,43 @@ int haswell_membound_initialise_papi(plugin_id_t plugin_id)
     if (retval != PAPI_VER_CURRENT  &&  retval > 0)
     {
         allinea_set_plugin_error_messagef(plugin_id, retval, "PAPI library version mismatch. PAPI error: %s", PAPI_strerror(retval));
-        return ERRNO;
+        return ERROR;
     }
     if (retval < 0)
     {
         allinea_set_plugin_error_messagef(plugin_id, retval, "Could not initialise PAPI library. PAPI error: %s", PAPI_strerror(retval));
-        return ERRNO;
+        return ERROR;
     }
     retval = PAPI_is_initialized();
     if (retval != PAPI_LOW_LEVEL_INITED)
     {
         allinea_set_plugin_error_messagef(plugin_id, retval, "PAPI incorrectly initialised. PAPI error: %s", PAPI_strerror(retval));
-        return ERRNO;
+        return ERROR;
     }
     // Initialise thread support (as the program being profiled may be multithreaded).
     retval = PAPI_thread_init(haswell_membound_get_thread_id);
     if (retval != PAPI_VER_CURRENT  &&  retval > 0)
     {
         allinea_set_plugin_error_messagef(plugin_id, retval, "Could not enable thread support (error in PAPI_thread_init). PAPI error: %s", PAPI_strerror(retval));
-        return ERRNO;
+        return ERROR;
     }
     retval = PAPI_is_initialized();
     if (retval != PAPI_THREAD_LEVEL_INITED+PAPI_LOW_LEVEL_INITED)
     {
         allinea_set_plugin_error_messagef(plugin_id, retval, "PAPI not initialised with thread support. PAPI error: %s", PAPI_strerror(retval));
-        return ERRNO;
+        return ERROR;
     }
 
     int maxHardwareCounters = PAPI_num_counters();
     if (maxHardwareCounters < 0)
     {
         allinea_set_plugin_error_messagef(plugin_id, maxHardwareCounters, "This installation does not support PAPI");
-        return ERRNO;
+        return ERROR;
     }
     else if (maxHardwareCounters == 0)
     {
         allinea_set_plugin_error_messagef(plugin_id, 0, "This machine does not provide hardware counters");
-        return ERRNO;
+        return ERROR;
     }
 
     // Get the event codes for the string descriptors
@@ -286,7 +286,7 @@ extern "C" {
         if (haswell_membound_initialise_papi(plugin_id) != 0)
         {
             // allinea_set_plugin_error_message() should have been called by haswell_membound_initialise_papi()
-            return ERRNO;
+            return ERROR;
         }
 
         // Create the event sets
@@ -294,15 +294,24 @@ extern "C" {
         if (retval != PAPI_OK)
         {
             allinea_set_plugin_error_messagef(plugin_id, retval, "Could not create event set: %s", PAPI_strerror(retval));
-            return ERRNO;
+            return ERROR;
         }
 
         // We assume that all of the events have been found at this point
         retval= PAPI_add_events(gEventSet, gEventCodes.data(), gEventCodes.size());
         if (retval != PAPI_OK) {
-            allinea_set_plugin_error_messagef(plugin_id, retval, "Error adding"
-                    " events to the event set: %s", PAPI_strerror(retval));
-            return ERRNO;
+            if (retval > 0){
+                allinea_set_plugin_error_messagef(plugin_id, retval, "Error adding"
+                        " events to the event set. First error detected adding "
+                        "event \"%s\". PAPI error string given as  %s", 
+                        gEventNames[retval-1], PAPI_strerror(retval));
+            }
+            else {
+                allinea_set_plugin_error_messagef(plugin_id, retval, "Error "
+                        "adding events to the event set: %s",
+                        PAPI_strerror(retval));
+            }
+            return ERROR;
         }
 
         // Start the event set
@@ -325,29 +334,26 @@ extern "C" {
     int allinea_plugin_cleanup(plugin_id_t plugin_id, void *unused)
     {
         // Stop the event set counting
-        //int retval = PAPI_stop(papiEventSet, eventValues);
         int retval= PAPI_stop(gEventSet, gEventValues.data());
         if (retval != PAPI_OK)
         {
             allinea_set_plugin_error_messagef(plugin_id, retval, "Error in PAPI_stop: %s", PAPI_strerror(retval));
-            return ERRNO;
+            return ERROR;
         }
         // Remove all events from the event set
-        //retval = PAPI_cleanup_eventset(papiEventSet);
         retval = PAPI_cleanup_eventset(gEventSet);
         if (retval != PAPI_OK)
         {
             allinea_set_plugin_error_messagef(plugin_id, retval, "Error in PAPI_cleanup_eventset: %s", PAPI_strerror(retval));
-            return ERRNO;
+            return ERROR;
         }
 
         // Destroy the event set
-        //retval = PAPI_destroy_eventset(&papiEventSet);
         retval = PAPI_destroy_eventset(&gEventSet);
         if (retval != PAPI_OK)
         {
             allinea_set_plugin_error_messagef(plugin_id, retval, "Error in PAPI_destroy_eventset: %s", PAPI_strerror(retval));
-            return ERRNO;
+            return ERROR;
         }
 
         // Reset the event set
@@ -356,27 +362,28 @@ extern "C" {
         return 0;
     }
 
-    // The following function, during sample time, will update the counter values
-    // stored. This uses PAPI_accum, which resets the counter values after reading
-    // them
-    static int update_values(metric_id_t metric_id, const struct timespec* current_sample_time)
-    {
-        static unsigned long sLastSampleTime= 0;
-        const unsigned long now= current_sample_time->tv_nsec + current_sample_time->tv_sec * ONE_SECOND_NS;
-        // If we have already updated for the current sample there is nothing to do
-        if (now == sLastSampleTime)
-            return 0;
-
-        // Accumulate the values in the counters. The counter values are zeroed
-        // before this method, and counters are reset after retrieving the value
-        gEventValues.fill(0);
-        int retval= PAPI_accum(gEventSet, gEventValues.data());
-        if (retval != PAPI_OK){
-            allinea_set_metric_error_messagef(metric_id, retval, "Error updating metric values: %s", PAPI_strerror(retval));
-            return ERRNO;
-        }
-
-        sLastSampleTime= now;
-        return 0;
-    }
 } // extern "C"
+
+// The following function, during sample time, will update the counter values
+// stored. This uses PAPI_accum, which resets the counter values after reading
+// them
+static int update_values(metric_id_t metric_id, const struct timespec* current_sample_time)
+{
+    static std::uint_fast64_t sLastSampleTime= 0;
+    const std::uint_fast64_t now= current_sample_time->tv_nsec + current_sample_time->tv_sec * ONE_SECOND_NS;
+    // If we have already updated for the current sample there is nothing to do
+    if (now == sLastSampleTime)
+        return 0;
+
+    // Accumulate the values in the counters. The counter values are zeroed
+    // before this method, and counters are reset after retrieving the value
+    gEventValues.fill(0);
+    int retval= PAPI_accum(gEventSet, gEventValues.data());
+    if (retval != PAPI_OK){
+        allinea_set_metric_error_messagef(metric_id, retval, "Error updating metric values: %s", PAPI_strerror(retval));
+        return ERROR;
+    }
+
+    sLastSampleTime= now;
+    return 0;
+}

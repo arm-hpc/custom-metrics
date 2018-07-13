@@ -5,8 +5,16 @@ Detecting Memory-Boundedness with Hardware Performance Counters, Molka, D. and
 Schöne, R. and Hackenberg, D. and Nagel, W. E., ICPE '17, Proceedings of the
 8th ACM/SPEC International Conference on Performance Engineering, Pages 27-38
 
-The custom metric implements the collection of the hardware counters identified
-in the above paper for catergorising memory stall reasons as either being
-bandwidth or latency bound. The hardware counters collected are only known to
-be accurate for this purpose on an Intel Haswell (Xeon v3) CPU on which PAPI is
-installed. For more information see the README document in this folder.
+Thanks also go to John Wohlbier and Michael Stokes of Engility for their time
+and interesting discussions, as well as for bringing the above paper to the
+attention of the Arm Forge team.
+
+The custom metric included here implements the collection of the hardware
+counters identified in the above paper for catergorising memory stall reasons
+as either being bandwidth or latency bound. The hardware counters collected are
+only known to be accurate for this purpose on the Intel® Xeon® E5 v3 processor
+family. The PAPI library is also required for data to be gathered. For more
+information see the README document in this folder.
+
+Intel and Xeon are trademarks of Intel Corporation or its subsidiaries in the
+U.S. and/or other countries.
