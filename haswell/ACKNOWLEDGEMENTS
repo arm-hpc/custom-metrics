@@ -1,0 +1,12 @@
+The work presented in the code is based upon the research from the following
+research paper.
+
+Detecting Memory-Boundedness with Hardware Performance Counters, Molka, D. and
+Schöne, R. and Hackenberg, D. and Nagel, W. E., ICPE '17, Proceedings of the
+8th ACM/SPEC International Conference on Performance Engineering, Pages 27-38
+
+The custom metric implements the collection of the hardware counters identified
+in the above paper for catergorising memory stall reasons as either being
+bandwidth or latency bound. The hardware counters collected are only known to
+be accurate for this purpose on an Intel Haswell (Xeon v3) CPU on which PAPI is
+installed. For more information see the README document in this folder.

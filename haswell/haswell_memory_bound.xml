@@ -1,0 +1,132 @@
+<metricdefinitions version="1">
+    <metric id="haswell.papi.active_cycles">
+        <enabled>default_yes</enabled>
+        <units>Cycles</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_active_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Active cycles</displayName>
+            <description>Number of active cycles over a sample period</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.productive_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_productive_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Productive cycles</displayName>
+            <description>Ratio of productive to active cycles over a sample period</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.stall_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_stall_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Stall cycles</displayName>
+            <description>Ratio of stalled to active cycles over a sample period</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.memory_bound">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_memory_bound"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Cycles memory bound</displayName>
+            <description>Fraction of cycles that are stalled waiting on memory</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.bandwidth_bound">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_bandwidth_bound"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Cycles bandwidth bound</displayName>
+            <description>Fraction of cycles that are stalled because of memory bandwidth reasons</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.latency_bound">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_latency_bound"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Cycles latency bound</displayName>
+            <description>Fraction of cycles that are stalled because of memory latency reasons</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.other_stall_reason">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_other_stall_reason"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Stalled for other reasons</displayName>
+            <description>Fraction of cycles that are stalled for non-memory related reasons</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metricGroup id="Haswell_papi_memory_boundedness">
+        <displayName>MemoryBound</displayName>
+        <description>Gives a measure of how memory bound an application is. This is only accurate on Intel Haswell (Xeon v3) cores</description>
+        <metric ref="haswell.papi.active_cycles"/>
+        <metric ref="haswell.papi.productive_cycles"/>
+        <metric ref="haswell.papi.stall_cycles" />
+        <metric ref="haswell.papi.memory_bound" />
+        <metric ref="haswell.papi.bandwidth_bound" />
+        <metric ref="haswell.papi.latency_bound" />
+        <metric ref="haswell.papi.other_stall_reason" />
+    </metricGroup>
+
+    <source id="haswell.papi.membound.src">
+        <sharedLibrary>libhaswellmemorybound.so</sharedLibrary>
+    </source>
+
+</metricdefinitions>
+
+
