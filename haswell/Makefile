@@ -27,8 +27,11 @@ CXX=g++
 endif
 endif
 
-CFLAGS=--std=c++11 -O3 -fPIC -I$(ARM_FORGE_METRIC_PLUGIN_DIR)/include
-LFLAGS=-lpapi
+#PAPI_DIR=/path/to/papi/installation
+PAPI_DIR=/usr
+
+CFLAGS=--std=c++11 -O3 -fPIC -I$(ARM_FORGE_METRIC_PLUGIN_DIR)/include -I$(PAPI_DIR)/include
+LFLAGS=-L$(PAPI_DIR)/lib -lpapi
 DEFAULTCONFIGDIR=~/.allinea/map/metrics
 
 CONFIGDIR := $(shell if [ -z "${ALLINEA_CONFIG_DIR}" ]; then echo "$(DEFAULTCONFIGDIR)"; else echo "${ALLINEA_CONFIG_DIR}/map/metrics";  fi)

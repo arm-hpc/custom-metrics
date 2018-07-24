@@ -1,4 +1,5 @@
 <metricdefinitions version="1">
+
     <metric id="haswell.papi.active_cycles">
         <enabled>default_yes</enabled>
         <units>Cycles/s</units>
@@ -29,7 +30,7 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Productive cycles</displayName>
-            <description>Ratio of productive to active cycles over a sample period</description>
+            <description>Fraction of active cycles that are not stalled (productive) over a sample period</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
@@ -45,7 +46,39 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Stall cycles</displayName>
-            <description>Ratio of stalled to active cycles over a sample period</description>
+            <description>Fraction of active cycles that are stalled over a sample period</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.store_buffer_stall_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_store_buffer_stall_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Store buffer stall cycles</displayName>
+            <description>Fraction of active cycles that are stalled due to full store buffer over a sample period. Used to calculate memory bound and bandwidth bound stall cycles. When using ARM_MAP_BANDWIDTH_BOUND=1 it is the fraction of stalled cycles.</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.l1d_pending_stall_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_l1d_pending_stall_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>L1D pending stall cycles</displayName>
+            <description>Fraction of active cycles that are stalled due to at least one L1D demand load outstanding over a sample period. Used to calculate memory bound stall cycles.</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
@@ -61,7 +94,39 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Cycles memory bound</displayName>
-            <description>Fraction of cycles that are stalled waiting on memory</description>
+            <description>Fraction of stalled cycles that are stalled waiting on memory</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.l1d_pend_miss_fb_full_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_l1d_pend_miss_fb_full_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>L1D fill buffer unavailable stall cycles</displayName>
+            <description>Fraction of stalled cycles due to L1D fill buffer unavailable over a sample period. Used to calculate bandwidth bound cycles.</description>
+            <type>other</type>
+            <colour>SpecialLine6</colour>
+        </display>
+    </metric>
+
+    <metric id="haswell.papi.offcore_requests_buffer_sq_cycles">
+        <enabled>default_yes</enabled>
+        <units></units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="haswell.papi.membound.src"
+            functionName="haswell_membound_offcore_requests_buffer_sq_cycles"
+            divideBySampleTime="false" />
+        <display>
+            <displayName>Offcore requests buffer full stall cycles</displayName>
+            <description>Fraction of stalled cycles due to offcore requests buffer full over a sample period. Used to calculate bandwidth bound cycles.</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
@@ -77,12 +142,13 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Cycles bandwidth bound</displayName>
-            <description>Fraction of cycles that are stalled because of memory bandwidth reasons</description>
+            <description>Fraction of stalled cycles that are stalled because of memory bandwidth reasons over a sample period</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
     </metric>
 
+<!--
     <metric id="haswell.papi.latency_bound">
         <enabled>default_yes</enabled>
         <units></units>
@@ -93,7 +159,7 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Cycles latency bound</displayName>
-            <description>Fraction of cycles that are stalled because of memory latency reasons</description>
+            <description>Fraction of stalled cycles that are stalled because of memory latency reasons</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
@@ -109,22 +175,29 @@
             divideBySampleTime="false" />
         <display>
             <displayName>Stalled for other reasons</displayName>
-            <description>Fraction of cycles that are stalled for non-memory related reasons</description>
+            <description>Fraction of stalled cycles that are stalled for non-memory related reasons</description>
             <type>other</type>
             <colour>SpecialLine6</colour>
         </display>
     </metric>
+-->
 
     <metricGroup id="Haswell_papi_memory_boundedness">
         <displayName>MemoryBound</displayName>
         <description>Gives a measure of how memory bound an application is. This is only accurate on Intel Haswell (Xeon v3) cores</description>
         <metric ref="haswell.papi.active_cycles"/>
         <metric ref="haswell.papi.productive_cycles"/>
-        <metric ref="haswell.papi.stall_cycles" />
+        <metric ref="haswell.papi.stall_cycles"/>
+	<metric ref="haswell.papi.store_buffer_stall_cycles"/>
+	<metric ref="haswell.papi.l1d_pending_stall_cycles"/>
         <metric ref="haswell.papi.memory_bound" />
+	<metric ref="haswell.papi.l1d_pend_miss_fb_full_cycles"/>
+	<metric ref="haswell.papi.offcore_requests_buffer_sq_cycles"/>
         <metric ref="haswell.papi.bandwidth_bound" />
+<!--
         <metric ref="haswell.papi.latency_bound" />
         <metric ref="haswell.papi.other_stall_reason" />
+-->
     </metricGroup>
 
     <source id="haswell.papi.membound.src">
@@ -132,5 +205,4 @@
     </source>
 
 </metricdefinitions>
-
 
