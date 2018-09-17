@@ -25,7 +25,7 @@ This should place the newly built metric in your local metrics dir `~/.allinea/m
 
 Now when you run a MAP profile it should collect the extra MUSCLE2 communication data.
 
-Note this metric also contains an Allinea Performance Reports Partial Reports, which will be installed by default, for presenting MUSCLE2 data in Performance Reports.
+Note this metric also contains an Arm Performance Reports Partial Reports, which will be installed by default, for presenting MUSCLE2 data in Performance Reports.
 
 
 POC
