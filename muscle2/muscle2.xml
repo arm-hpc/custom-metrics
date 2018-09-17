@@ -1,0 +1,176 @@
+<metricdefinitions version="1">
+    <metric id="com.allinea.metrics.muscle2.send_rate">
+        <units>B/s</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_bytes_sent" 
+                divideBySampleTime="true"/>
+        <display>
+            <description>MUSCLE2 bytes sent per second per process</description>
+            <displayName>MUSCLE2 sent</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.send_calls">
+        <units>calls/s</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_send_calls" 
+                divideBySampleTime="true"/>
+        <display>
+            <description>Number of MUSCLE2 send calls per second</description>
+            <displayName>MUSCLE2 sends</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.send_duration">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_send_duration" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Duration of sampled MUSCLE2 send calls (s)</description>
+            <displayName>MUSCLE2 send duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.send_duration_cum">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_send_duration_cumulative" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Cumulative duration of sampled MUSCLE2 send calls (s)</description>
+            <displayName>Total MUSCLE2 send duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.receive_rate">
+        <units>B/s</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_bytes_received" 
+                divideBySampleTime="true"/>
+        <display>
+            <description>MUSCLE2 bytes received per second per process</description>
+            <displayName>MUSCLE2 received</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.receive_calls">
+        <units>calls/s</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_receive_calls" 
+                divideBySampleTime="true"/>
+        <display>
+            <description>Number of MUSCLE2 receive calls per second</description>
+            <displayName>MUSCLE2 receives</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.receive_duration">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_receive_duration" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Duration of sampled MUSCLE2 receive calls (s)</description>
+            <displayName>MUSCLE2 receive duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.receive_duration_cum">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_receive_duration_cumulative" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Cumulative duration of sampled MUSCLE2 receive calls (s)</description>
+            <displayName>Total MUSCLE2 receive duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+
+    <metric id="com.allinea.metrics.muscle2.barrier_calls">
+        <units>calls/s</units>
+        <dataType>uint64_t</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_barrier_calls" 
+                divideBySampleTime="true"/>
+        <display>
+            <description>Number of MUSCLE2 barrier calls per second</description>
+            <displayName>MUSCLE2 barriers</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.barrier_duration">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_barrier_duration" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Duration of sampled MUSCLE2 barrier calls (s)</description>
+            <displayName>MUSCLE2 barrier duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metric id="com.allinea.metrics.muscle2.barrier_duration_cum">
+        <units>s</units>
+        <dataType>double</dataType>
+        <domain>time</domain>
+        <source ref="com.allinea.metrics.muscle2_src" functionName="allinea_muscle2_get_barrier_duration_cumulative" 
+                divideBySampleTime="false"/>
+        <display>
+            <description>Cumulative duration of sampled MUSCLE2 barrier calls (s)</description>
+            <displayName>Total MUSCLE2 barrier duration</displayName>
+            <type>muscle2</type>
+            <colour>salmon</colour>
+        </display>
+    </metric>
+
+    <metricGroup id="MUSCLE2">
+        <displayName>MUSCLE2</displayName>
+        <description>All metrics relating to communication via MUSCLE2.</description>
+        <metric ref="com.allinea.metrics.muscle2.send_rate"/>
+        <metric ref="com.allinea.metrics.muscle2.send_calls"/>
+        <metric ref="com.allinea.metrics.muscle2.send_duration"/>
+        <metric ref="com.allinea.metrics.muscle2.send_duration_cum"/>
+        <metric ref="com.allinea.metrics.muscle2.receive_rate"/>
+        <metric ref="com.allinea.metrics.muscle2.receive_calls"/>
+        <metric ref="com.allinea.metrics.muscle2.receive_duration"/>
+        <metric ref="com.allinea.metrics.muscle2.receive_duration_cum"/>
+        <metric ref="com.allinea.metrics.muscle2.barrier_calls"/>
+	<metric ref="com.allinea.metrics.muscle2.barrier_duration"/>
+        <metric ref="com.allinea.metrics.muscle2.barrier_duration_cum"/>
+    </metricGroup>
+
+    <source id="com.allinea.metrics.muscle2_src">
+        <sharedLibrary>libmuscle2.so</sharedLibrary>
+    </source>
+</metricdefinitions>

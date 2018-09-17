@@ -1,0 +1,180 @@
+<partialReport name="MUSCLE2Report" 
+               xmlns="http://www.allinea.com/2016/AllineaReports"> 
+  <reportMetrics>
+
+
+    <!-- multiple <reportMetric> elements can be defined -->
+    <!-- source attribute must be set to "metric" --> 
+
+    <reportMetric id="muscle2.sendrate.max" 
+                  displayName="Maximum send rate" 
+                  units="B/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_rate" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendrate.mean" 
+                  displayName="Mean send rate" 
+                  units="B/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_rate" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendcalls.max" 
+                  displayName="Maximum send call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_calls" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendcalls.mean" 
+                  displayName="Mean send call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_calls" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendduration.max" 
+                  displayName="Maximum send duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_duration" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendduration.mean" 
+                  displayName="Mean send duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_duration" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.sendduration.total" 
+                  displayName="Total time in MUSCLE2 Sends" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.send_duration_cum" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+
+
+
+    <reportMetric id="muscle2.receiverate.max" 
+                  displayName="Maximum receive rate" 
+                  units="B/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_rate" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receiverate.mean" 
+                  displayName="Mean receive rate" 
+                  units="B/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_rate" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receivecalls.max" 
+                  displayName="Maximum receive call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_calls" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receivecalls.mean" 
+                  displayName="Mean receive call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_calls" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receiveduration.max" 
+                  displayName="Maximum receive duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_duration" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receiveduration.mean" 
+                  displayName="Mean receive duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_duration" sampleValue="max" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.receiveduration.total" 
+                  displayName="Total time in MUSCLE2 receives" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.receive_duration_cum" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+
+
+
+    <reportMetric id="muscle2.barriercalls.max" 
+                  displayName="Maximum barrier call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.barrier_calls" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.barriercalls.mean" 
+                  displayName="Mean barrier call rate" 
+                  units="/s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.barrier_calls" sampleValue="mean" aggregation="mean"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.barrierduration.max" 
+                  displayName="Maximum barrier duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.barrier_duration" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+    <reportMetric id="muscle2.barrierduration.mean" 
+                  displayName="Mean barrier duration" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.barrier_duration" sampleValue="mean" aggregation="mean"/>
+    </reportMetric> 
+   
+    <reportMetric id="muscle2.barrierduration.total" 
+                  displayName="Total time in MUSCLE2 barriers" 
+                  units="s" 
+                  source="metric"
+                  colour="hsl(25, 70, 71)">
+      <sourceDetails metricRef="com.allinea.metrics.muscle2.barrier_duration_cum" sampleValue="max" aggregation="max"/>
+    </reportMetric> 
+   
+  </reportMetrics> 
+  <subsections> 
+    <!-- multiple <subsection> elements can be defined -->
+    <subsection id="MUSCLE2Metrics"
+                heading="MUSCLE2"
+                colour="hsl(21, 70, 71)">
+      <text>MUSCLE2 performance metrics</text> 
+      <!-- multiple <entry> elements can be defined --> 
+      
+      <entry reportMetric="muscle2.receiveduration.total" group="MUSCLE2GroupTotals"/>
+      <entry reportMetric="muscle2.sendduration.total" group="MUSCLE2GroupTotals"/>
+      <entry reportMetric="muscle2.barrierduration.total" group="MUSCLE2GroupTotals"/>
+      <entry reportMetric="muscle2.sendrate.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.sendrate.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.sendcalls.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.sendcalls.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.sendduration.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.sendduration.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receiverate.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receiverate.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receivecalls.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receivecalls.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receiveduration.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.receiveduration.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.barriercalls.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.barriercalls.mean" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.barrierduration.max" group="MUSCLE2Group"/>
+      <entry reportMetric="muscle2.barrierduration.mean" group="MUSCLE2Group"/>
+    </subsection>
+  </subsections> 
+</partialReport> 

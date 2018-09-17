@@ -1,0 +1,4 @@
+[submodule "muscle2/muscle2"]
+	path = muscle2/muscle2
+	url = https://github.com/psnc-apps/muscle2.git
+	branch = compat
